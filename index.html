@@ -1,90 +1,289 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Progate</title>
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-</head>
-<body>
+<html lang="ja">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   My Portfolio
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- ヘッダー：ナビゲーションメニュー -->
   <header>
-    <div class="container">
-      <div class="header-left">
-        <img class="logo" src="https://prog-8.com/images/html/advanced/main_logo.png">
-      </div>
-      <span class="fa fa-bars menu-icon"></span>
-      <div class="header-right">
-        <a href="#">レッスン</a>
-        <a href="#">新規登録</a>
-        <a href="#" class="login">ログイン</a>
-      </div>
+   <nav class="container">
+    <div class="logo">
+     Portfolio
     </div>
+    <ul class="nav-links">
+     <li>
+      <a href="#home">
+       ホーム
+      </a>
+     </li>
+     <li>
+      <a href="#portfolio">
+       作品
+      </a>
+     </li>
+     <li>
+      <a href="#about">
+       自己紹介
+      </a>
+     </li>
+     <li>
+      <a href="#contact">
+       お問い合わせ
+      </a>
+     </li>
+    </ul>
+   </nav>
   </header>
-  <div class="top-wrapper">
-    <div class="container">
-      <h1>LEARN TO CODE.<br>LEARN TO BE CREATIVE.</h1>
-      <p>Progateはオンラインプログラミング学習サービスです。<br>初心者にもやさしいスライドとレッスンで、ウェブサービスを作りながらプログラミングを学んでいきましょう。</p>
-      <div class="btn-wrapper">
-        <a href="#" class="btn signup">新規登録はこちら</a>
-        <p>or</p>
-        <a href="#" class="btn facebook"><span class="fa fa-facebook"></span>Facebookで登録</a>
-        <a href="#" class="btn twitter"><span class="fa fa-twitter"></span>Twitterで登録</a>
+  <!-- メインビジュアル：最初に表示される大きなセクション -->
+  <section class="hero" id="home">
+   <div class="hero-content">
+    <h1>
+     Creative Portfolio
+    </h1>
+    <p>
+     素晴らしい作品を通じて、あなたの物語を伝えます
+    </p>
+    <a class="cta-button" href="#portfolio">
+     作品を見る
+    </a>
+   </div>
+  </section>
+  <!-- ポートフォリオセクション：YouTube動画を表示 -->
+  <section class="section" id="portfolio">
+   <div class="container">
+    <h2 class="section-title">
+     Portfolio
+    </h2>
+    <div class="portfolio-grid">
+     <!-- 作品1：YouTube動画のIDを変更してください -->
+     <div class="portfolio-item fade-in">
+      <div class="video-container">
+       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="作品1">
+       </iframe>
       </div>
+      <div class="portfolio-info">
+       <h3>
+        プロジェクト名1
+       </h3>
+       <p>
+        この作品の詳細な説明をここに書きます。どのような技術を使用し、どのような課題を解決したかを説明してください。
+       </p>
+       <div class="portfolio-tags">
+        <span class="tag">
+         HTML
+        </span>
+        <span class="tag">
+         CSS
+        </span>
+        <span class="tag">
+         JavaScript
+        </span>
+       </div>
+      </div>
+     </div>
+     <!-- 作品2：YouTube動画のIDを変更してください -->
+     <div class="portfolio-item fade-in">
+      <div class="video-container">
+       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" src="https://www.youtube.com/embed/jNQXAC9IVRw" title="作品2">
+       </iframe>
+      </div>
+      <div class="portfolio-info">
+       <h3>
+        プロジェクト名2
+       </h3>
+       <p>
+        この作品の詳細な説明をここに書きます。制作期間、使用した技術、学んだことなどを含めてください。
+       </p>
+       <div class="portfolio-tags">
+        <span class="tag">
+         React
+        </span>
+        <span class="tag">
+         Node.js
+        </span>
+        <span class="tag">
+         Database
+        </span>
+       </div>
+      </div>
+     </div>
+     <!-- 作品3：YouTube動画のIDを変更してください -->
+     <div class="portfolio-item fade-in">
+      <div class="video-container">
+       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" src="https://www.youtube.com/embed/ZZ5LpwO-An4" title="作品3">
+       </iframe>
+      </div>
+      <div class="portfolio-info">
+       <h3>
+        プロジェクト名3
+       </h3>
+       <p>
+        この作品の詳細な説明をここに書きます。プロジェクトの目標、実装した機能、今後の改善点などを記載してください。
+       </p>
+       <div class="portfolio-tags">
+        <span class="tag">
+         Python
+        </span>
+        <span class="tag">
+         Machine Learning
+        </span>
+        <span class="tag">
+         API
+        </span>
+       </div>
+      </div>
+     </div>
+     <!-- 作品4：YouTube動画のIDを変更してください -->
+     <div class="portfolio-item fade-in">
+      <div class="video-container">
+       <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" src="https://www.youtube.com/embed/fJ9rUzIMcZQ" title="作品4">
+       </iframe>
+      </div>
+      <div class="portfolio-info">
+       <h3>
+        プロジェクト名4
+       </h3>
+       <p>
+        この作品の詳細な説明をここに書きます。チーム開発の経験、使用したツール、プロジェクトの成果などを説明してください。
+       </p>
+       <div class="portfolio-tags">
+        <span class="tag">
+         Vue.js
+        </span>
+        <span class="tag">
+         Firebase
+        </span>
+        <span class="tag">
+         Mobile
+        </span>
+       </div>
+      </div>
+     </div>
     </div>
-  </div>
-  <div class="lesson-wrapper">
-    <div class="container">
-      <div class="heading">
-        <h2>Learn Where to Get Started!</h2>
-      </div>
-      <div class="lessons">
-        <div class="lesson">
-          <div class="lesson-icon">
-            <img src="https://prog-8.com/images/html/advanced/html.png">
-            <p>HTML & CSS</p>
-          </div>
-          <p class="text-contents">ウェブページの作成に使用される言語です。HTMLとCSSを組み合わせることで、静的なページを作り上げることができます。</p>
-        </div>
-        <div class="lesson">
-          <div class="lesson-icon">
-            <img src="https://prog-8.com/images/html/advanced/jQuery.png">
-            <p>jQuery</p>
-          </div>
-          <p class="text-contents">素敵な動きを手軽に実装できるJavaScriptライブラリです。 アニメーション効果をつけたり、Ajax（エイジャックス）を使って外部ファイルを読み込んだりと色々なことができます。</p>
-        </div>
-        <div class="lesson">
-          <div class="lesson-icon">
-            <img src="https://prog-8.com/images/html/advanced/ruby.png">
-            <p>Ruby</p>
-          </div>
-          <p class="text-contents">オープンソースの動的なプログラミング言語で、 シンプルさと高い生産性を備えています。大きなWebアプリケーションから小さな日用ツールまで、さまざまなソフトウェアを作ることができます。</p>
-        </div>
-        <div class="lesson">
-          <div class="lesson-icon">
-            <img src="https://prog-8.com/images/html/advanced/php.png">
-            <p>PHP</p>
-          </div>
-          <p class="text-contents">HTMLだけではページの内容を変えることはできません。PHPはHTMLにプログラムを埋め込み、それを可能にします。</p>
-        </div>
-      </div>
-      <div class="clear"></div>
+   </div>
+  </section>
+  <!-- 自己紹介セクション：プロフィール情報 -->
+  <section class="section" id="about">
+   <div class="container">
+    <h2 class="section-title">
+     About Me
+    </h2>
+    <div class="about-content fade-in">
+     <div class="about-image">
+      <!-- プロフィール画像をここに配置 -->
+      プロフィール画像
+     </div>
+     <div class="about-text">
+      <p>
+       こんにちは！私は創造的なプロジェクトに情熱を注ぐクリエイターです。テクノロジーとデザインの融合により、ユーザーにとって価値のある体験を生み出すことを目指しています。
+      </p>
+      <p>
+       常に新しい技術に挑戦し、学び続けることで、より良い作品を作り上げることに取り組んでいます。チームでの協力や個人での創作活動を通じて、多様なプロジェクトに参加してきました。
+      </p>
+     </div>
     </div>
-  </div>
-  <div class="message-wrapper">
-    <div class="container">
-      <div class="heading">
-        <h2>さぁ、あなたもProgateでプログラミングを学んでみませんか?</h2>
-        <h3>Let's learn to code, learn to be creative!</h3>
-      </div>
-      <span class="btn message">さっそく開発する</span>
+    <!-- スキルセクション：保有技術を表示 -->
+    <div class="skills">
+     <div class="skill-item">
+      <h4>
+       Frontend
+      </h4>
+      <p>
+       HTML, CSS, JavaScript, React, Vue.js
+      </p>
+     </div>
+     <div class="skill-item">
+      <h4>
+       Backend
+      </h4>
+      <p>
+       Node.js, Python, Database Design
+      </p>
+     </div>
+     <div class="skill-item">
+      <h4>
+       Design
+      </h4>
+      <p>
+       UI/UX Design, Photoshop, Figma
+      </p>
+     </div>
+     <div class="skill-item">
+      <h4>
+       Other
+      </h4>
+      <p>
+       Git, AWS, Docker, Project Management
+      </p>
+     </div>
     </div>
-  </div>
+   </div>
+  </section>
+  <!-- お問い合わせセクション：連絡フォーム -->
+  <section class="section" id="contact">
+   <div class="container">
+    <h2 class="section-title">
+     Contact
+    </h2>
+    <form class="contact-form fade-in">
+     <div class="form-group">
+      <label for="name">
+       お名前
+      </label>
+      <input id="name" name="name" required="" type="text"/>
+     </div>
+     <div class="form-group">
+      <label for="email">
+       メールアドレス
+      </label>
+      <input id="email" name="email" required="" type="email"/>
+     </div>
+     <div class="form-group">
+      <label for="subject">
+       件名
+      </label>
+      <input id="subject" name="subject" required="" type="text"/>
+     </div>
+     <div class="form-group">
+      <label for="message">
+       メッセージ
+      </label>
+      <textarea id="message" name="message" required="" rows="5"></textarea>
+     </div>
+     <button class="submit-button" type="submit">
+      送信する
+     </button>
+    </form>
+   </div>
+  </section>
+  <!-- フッター：最下部の情報 -->
   <footer>
-    <div class="container">
-      <img src="https://prog-8.com/images/html/advanced/footer_logo.png">
-      <p>Learn to Code, Learn to be Creative.</p>
+   <div class="container">
+    <div class="social-links">
+     <a href="#" target="_blank">
+      Twitter
+     </a>
+     <a href="#" target="_blank">
+      GitHub
+     </a>
+     <a href="#" target="_blank">
+      LinkedIn
+     </a>
+     <a href="#" target="_blank">
+      Instagram
+     </a>
     </div>
+    <p>
+     © 2024 Portfolio. All rights reserved.
+    </p>
+   </div>
   </footer>
-</body>
+  <script src="script.js">
+  </script>
+ </body>
 </html>
