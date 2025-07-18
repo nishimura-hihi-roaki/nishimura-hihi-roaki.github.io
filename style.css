@@ -214,6 +214,179 @@
             border: 1px solid rgba(0, 212, 255, 0.3);
         }
 
+        /* =================もっと見る ボタン===============*/
+        .more-videos-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 40px;
+            padding: 20px 0;
+        }
+
+        /* 左寄せにしたい場合 */
+        .more-videos-container.left {
+            justify-content: flex-start;
+        }
+
+        /* 中央寄せにしたい場合 */
+        .more-videos-container.center {
+            justify-content: center;
+        }
+
+        .more-videos-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .more-videos-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .more-videos-btn:hover::before {
+            left: 100%;
+        }
+
+        .more-videos-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .more-videos-btn:active {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .more-videos-btn-icon {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .more-videos-btn:hover .more-videos-btn-icon {
+            transform: translateX(5px);
+        }
+
+        /* 代替スタイル1: アウトライン版 */
+        .more-videos-btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 30px;
+            background: transparent;
+            color: #00d4ff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 2px solid #00d4ff;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .more-videos-btn-outline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            transition: width 0.3s ease;
+            z-index: -1;
+        }
+
+        .more-videos-btn-outline:hover::before {
+            width: 100%;
+        }
+
+        .more-videos-btn-outline:hover {
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        /* 代替スタイル2: ミニマル版 */
+        .more-videos-btn-minimal {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .more-videos-btn-minimal:hover {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* 代替スタイル3: グロー効果版 */
+        .more-videos-btn-glow {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .more-videos-btn-glow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.6), 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        /* モバイル対応 */
+        @media (max-width: 768px) {
+            .more-videos-btn,
+            .more-videos-btn-outline,
+            .more-videos-btn-glow {
+                padding: 12px 24px;
+                font-size: 14px;
+            }
+            
+            .more-videos-btn-minimal {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            
+            .more-videos-container {
+                margin-top: 30px;
+            }
+        }
+
+        
         /* ========== About（自己紹介）セクション ========== */
         .about-content {
             display: grid;
@@ -261,8 +434,8 @@
         }
 
         /* ========== コンタクトセクション ========== */
-        .contact-form {
-            max-width: 600px;
+        .contact-section {
+            max-width: 800px;
             margin: 0 auto;
             background: rgba(26, 26, 46, 0.8);
             padding: 40px;
@@ -270,51 +443,158 @@
             border: 1px solid rgba(0, 212, 255, 0.2);
         }
 
-        .form-group {
-            margin-bottom: 25px;
+        .contact-header {
+            text-align: center;
+            margin-bottom: 40px;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
+        .contact-header h2 {
             color: #00d4ff;
-            font-weight: 500;
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            background: rgba(0, 0, 0, 0.5);
+        .contact-header p {
+            color: #a0a0a0;
+            font-size: 1.1em;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+        }
+
+        .contact-item-icon {
+            font-size: 2.5em;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+
+        .contact-item h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .contact-item p {
+            color: white;
+            margin: 5px 0;
+            font-size: 1em;
+        }
+
+        .contact-item a {
+            color: #00d4ff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #66e6ff;
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 212, 255, 0.1);
             border: 1px solid rgba(0, 212, 255, 0.3);
-            border-radius: 8px;
-            color: white;
-            font-size: 16px;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #00d4ff;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-        }
-
-        .submit-button {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #00d4ff, #0099cc);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
+            border-radius: 50%;
+            color: #00d4ff;
+            font-size: 1.5em;
+            text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+        .social-link:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .availability-status {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .availability-status.busy {
+            background: rgba(255, 165, 0, 0.1);
+            border-color: rgba(255, 165, 0, 0.3);
+        }
+
+        .availability-status.unavailable {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: rgba(255, 0, 0, 0.3);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00ff00;
+            margin-right: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.busy {
+            background: #ffa500;
+        }
+
+        .status-indicator.unavailable {
+            background: #ff0000;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 20px;
+            }
+            
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .social-links {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
         }
 
         /* ========== フッター ========== */
@@ -378,4 +658,5 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
     
