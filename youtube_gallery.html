@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動画ポートフォリオ</title>
+    <link rel="stylesheet" href="youtube_gallery.css">
+    
+</head>
+<body>
+    
+    <div class="container">
+        <div class="header">
+            <h1>動画ポートフォリオ</h1>
+            <p>制作した一覧になります</p>
+        </div>
+        <div class="video-grid" id="videoGrid">
+            <!-- 動画カードがここに挿入されます -->
+        </div>
+        <div class="more-videos-container">
+            <a href="index.html" class="more-videos-btn-outline">
+                <span>戻る</span>
+                <span class="more-videos-btn-icon">↩</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- モーダル（containerの外に配置） -->
+    <div class="video-modal" id="videoModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">動画タイトル</h3>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <iframe class="video-frame" id="videoFrame" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script src="video_data.js"></script>
+    <script src="youtube_gallery.js"></script>
+</body>
+</html>
