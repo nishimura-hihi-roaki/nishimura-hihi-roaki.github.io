@@ -4,13 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>動画ポートフォリオ</title>
+    <link rel="icon" href="favicon.png">
+      <!-- 共通スタイル（必須） -->
+    <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="youtube_gallery.css">
-    
 </head>
 <body>
-    
-    <div class="container">
-        <div class="header">
+    <header class="header">
+        <nav class="container">
+         <div class="logo">
+          Portfolio
+         </div>
+         <ul class="nav-links">
+          <li>
+            <a href="index.html">
+            戻る
+           </a>
+          </li>
+         </ul>
+        </nav>
+       </header>
+    <div class="gallery-container ">
+        <div class="gallery-header">
             <h1>動画ポートフォリオ</h1>
             <p>制作した一覧になります</p>
         </div>
@@ -35,8 +50,32 @@
             <iframe class="video-frame" id="videoFrame" src="" allowfullscreen></iframe>
         </div>
     </div>
-
+  <!-- フッター：最下部の情報 -->
+  <footer class="footer">
+    <div class="container">
+     <div class="social-links">
+       <!-- SNSで公開するようなことがあれば
+      <a href="#" target="_blank">
+       Twitter
+      </a>
+      <a href="#" target="_blank">
+       GitHub
+      </a>
+      <a href="#" target="_blank">
+       LinkedIn
+      </a>
+      <a href="#" target="_blank">
+       Instagram
+      </a>
+     </div>
+     <p>
+       -->
+      © 2025 Portfolio. All rights reserved.
+     </p>
+    </div>
+   </footer>
     <script src="video_data.js"></script>
     <script src="youtube_gallery.js"></script>
+    
 </body>
 </html>

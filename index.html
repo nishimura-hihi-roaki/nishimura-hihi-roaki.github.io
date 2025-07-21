@@ -7,11 +7,14 @@
    My Portfolio
   </title>
   <link rel="icon" href="favicon.png">
-  <link href="style.css" rel="stylesheet"/>
+  <!-- 共通スタイル（必須） -->
+  <link rel="stylesheet" href="common.css">
+  <!-- メインサイト用 -->
+  <link rel="stylesheet" href="style.css">
  </head>
  <body>
   <!-- ヘッダー：ナビゲーションメニュー -->
-  <header>
+  <header class="header">
    <nav class="container">
     <div class="logo">
      Portfolio
@@ -222,10 +225,9 @@
      About Me
     </h2>
     <div class="about-content fade-in">
-     <div class="about-image">
-      <!-- プロフィール画像をここに配置 -->
-      プロフィール画像
-     </div>
+      <div class="about-image">
+        <img src="chou.jpg" alt="プロフィール画像">
+       </div>
      <div class="about-text">
       <p>
         東京工科大学卒業後、株式会社ウィズテックに就職し、約3年間Webサイト開発に従事。クライアントに常駐し、開発、テストを主に担当してきました。
@@ -299,7 +301,7 @@
    </div>
   </section>
   <!-- フッター：最下部の情報 -->
-  <footer>
+  <footer class="footer">
    <div class="container">
     <div class="social-links">
       <!-- SNSで公開するようなことがあれば

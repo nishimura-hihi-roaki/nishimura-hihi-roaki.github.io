@@ -1,28 +1,37 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* YouTube ギャラリー専用スタイル */
+/* common.cssを先に読み込んでください */
 
+/* ========== ページ固有の設定 ========== */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* bodyのpaddingを削除してヘッダー・フッターとの競合を回避 */
     background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1e3a8a 100%);
+    /* ヘッダーの高さ分の上部マージンを追加 */
+    padding-top: 80px;
+    /* フッターとの適切な配置のためminHeightを設定 */
     min-height: 100vh;
-    padding: 20px;
 }
 
-.container {
+.gallery-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto; /* 上下のマージンを追加 */
     background: rgba(15, 15, 35, 0.95);
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     overflow: hidden;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(30, 58, 138, 0.3);
+    /* フッター用のマージンを追加 */
+    margin-bottom: 40px;
 }
 
-.header {
+/* フッターを最下部に配置するための調整 */
+.footer {
+    margin-top: 40px;
+    clear: both;
+}
+
+/* ========== ギャラリーヘッダー ========== */
+.gallery-header {
     background: linear-gradient(45deg, #1e3a8a, #3730a3, #1e40af);
     color: white;
     text-align: center;
@@ -31,7 +40,7 @@ body {
     overflow: hidden;
 }
 
-.header::before {
+.gallery-header::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -46,25 +55,24 @@ body {
     animation: rotate 20s linear infinite;
 }
 
-@keyframes rotate {
-    to { transform: rotate(360deg); }
-}
-
-.header h1 {
+.gallery-header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
     position: relative;
     z-index: 1;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--text-primary);
 }
 
-.header p {
+.gallery-header p {
     font-size: 1.1rem;
     opacity: 0.9;
     position: relative;
     z-index: 1;
+    color: var(--text-primary);
 }
 
+/* ========== 動画グリッド ========== */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -79,7 +87,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     transition: all 0.4s ease;
     position: relative;
-    border: 1px solid rgba(30, 58, 138, 0.2);
+    border: 1px solid var(--border-color);
 }
 
 .video-card:hover {
@@ -88,6 +96,7 @@ body {
     border-color: rgba(59, 130, 246, 0.5);
 }
 
+/* ========== 動画サムネイル ========== */
 .video-thumbnail {
     position: relative;
     width: 100%;
@@ -107,6 +116,7 @@ body {
     transform: scale(1.1);
 }
 
+/* ========== 再生ボタンオーバーレイ ========== */
 .play-overlay {
     position: absolute;
     top: 50%;
@@ -139,6 +149,7 @@ body {
     border-color: #93c5fd;
 }
 
+/* ========== 動画情報 ========== */
 .video-info {
     padding: 20px;
 }
@@ -146,7 +157,7 @@ body {
 .video-title {
     font-size: 1.1rem;
     font-weight: bold;
-    color: #e5e7eb;
+    color: var(--text-primary);
     margin-bottom: 8px;
     line-height: 1.4;
 }
@@ -154,7 +165,7 @@ body {
 .video-id {
     font-family: 'Courier New', monospace;
     font-size: 0.9rem;
-    color: #9ca3af;
+    color: var(--text-secondary);
     background: rgba(30, 58, 138, 0.2);
     padding: 4px 8px;
     border-radius: 4px;
@@ -162,6 +173,7 @@ body {
     border: 1px solid rgba(59, 130, 246, 0.3);
 }
 
+/* ========== 動画モーダル ========== */
 .video-modal {
     display: none;
     position: fixed;
@@ -175,10 +187,11 @@ body {
     justify-content: center;
     align-items: center;
 }
-/* 表示時のスタイル */
+
 .video-modal.show {
     display: flex;
 }
+
 .modal-content {
     width: 90%;
     max-width: 800px;
@@ -188,7 +201,6 @@ body {
     animation: modalFadeIn 0.3s ease;
     border: 1px solid rgba(59, 130, 246, 0.3);
 }
-
 
 @keyframes modalFadeIn {
     from { 
@@ -203,17 +215,23 @@ body {
 
 .modal-header {
     background: linear-gradient(45deg, #1e3a8a, #3730a3);
-    color: white;
+    color: var(--text-primary);
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
+.modal-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
 .close-modal {
     background: none;
     border: none;
-    color: white;
+    color: var(--text-primary);
     font-size: 24px;
     cursor: pointer;
     padding: 5px;
@@ -234,10 +252,20 @@ body {
     width: 100%;
     height: 450px;
     border: none;
+    display: block;
 }
 
+/* ========== レスポンシブ（モバイル対応） ========== */
 @media (max-width: 768px) {
-    .header h1 {
+    body {
+        padding-top: 70px; /* モバイルでのヘッダー高さ調整 */
+    }
+
+    .gallery-container {
+        margin: 10px auto 20px auto; /* モバイルでのマージン調整 */
+    }
+
+    .gallery-header h1 {
         font-size: 2rem;
     }
     
@@ -254,113 +282,78 @@ body {
     
     .video-frame {
         height: 250px;
-    }   
+    }
+
+    .video-card {
+        margin-bottom: 20px;
+    }
+
+    .play-overlay {
+        width: 50px;
+        height: 50px;
+    }
+
+    .play-overlay::after {
+        border-left: 16px solid #60a5fa;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        margin-left: 3px;
+    }
 }
-        /* =================もっと見る ボタン===============*/
-        .more-videos-container {
-            display: flex;
-            justify-content:center;
-            margin-top: 40px;
-            padding: 20px 0;
-        }
 
-        /* 左寄せにしたい場合 */
-        .more-videos-container.left {
-            justify-content: flex-start;
-        }
+@media (max-width: 480px) {
+    body {
+        padding-top: 60px;
+    }
 
-        /* 中央寄せにしたい場合 */
-        .more-videos-container.center {
-            justify-content: center;
-        }
+    .gallery-header {
+        padding: 30px 15px;
+    }
 
-        .more-videos-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 30px;
-            background: linear-gradient(45deg, #00d4ff, #0099cc);
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 600;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    .gallery-header h1 {
+        font-size: 1.8rem;
+    }
 
-        .more-videos-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
+    .gallery-header p {
+        font-size: 1rem;
+    }
 
-        .more-videos-btn:hover::before {
-            left: 100%;
-        }
+    .video-grid {
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 15px;
+    }
 
-        .more-videos-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
-            border-color: rgba(0, 212, 255, 0.5);
-        }
+    .video-thumbnail {
+        height: 180px;
+    }
 
-        .more-videos-btn:active {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-        }
+    .video-info {
+        padding: 15px;
+    }
 
-        .more-videos-btn-icon {
-            font-size: 18px;
-            transition: transform 0.3s ease;
-        }
+    .video-title {
+        font-size: 1rem;
+    }
+}
 
-        .more-videos-btn:hover .more-videos-btn-icon {
-            transform: translateX(5px);
-        }
+/* ========== 高解像度ディスプレイ対応 ========== */
+@media (min-width: 1400px) {
+    .gallery-container {
+        max-width: 1400px;
+    }
 
-        /* 代替スタイル1: アウトライン版 */
-        .more-videos-btn-outline {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px 30px;
-            background: transparent;
-            color: #00d4ff;
-            text-decoration: none;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 600;
-            border: 2px solid #00d4ff;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+    .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 40px;
+        padding: 50px;
+    }
 
-        .more-videos-btn-outline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(45deg, #00d4ff, #0099cc);
-            transition: width 0.3s ease;
-            z-index: -1;
-        }
+    .gallery-header h1 {
+        font-size: 3rem;
+    }
 
-        .more-videos-btn-outline:hover::before {
-            width: 100%;
-        }
-
-        .more-videos-btn-outline:hover {
-            color: white;
-            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
-        }
+    .video-thumbnail {
+        height: 220px;
+    }
+}
