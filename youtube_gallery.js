@@ -61,50 +61,37 @@ function createImageObserver() {
     }, options);
 }
 
-// 画像読み込み最適化
+// シンプル版：低画質のみの画像読み込み
 function loadImage(img) {
     const videoId = img.dataset.videoId;
     if (loadedImages.has(videoId)) return;
 
-    // 高解像度→低解像度のフォールバック
-    const highResUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-    const lowResUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+    // 低画質のみ使用（hqdefault.jpg = 480x360）
+    const imageUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 
-    // プリロード用のImage要素を作成
-    const tempImg = new Image();
-    
-    tempImg.onload = () => {
-        // 画像読み込み成功時
-        img.src = highResUrl;
+    // 直接設定（プリロード不要）
+    img.onload = () => {
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.3s ease';
         
-        // 次のフレームで表示（レイアウトシフト防止）
         requestAnimationFrame(() => {
             img.style.opacity = '1';
         });
         
         loadedImages.add(videoId);
-        imageCache.set(videoId, highResUrl);
+        img.onload = null; // メモリ解放
     };
     
-    tempImg.onerror = () => {
-        // 高解像度が失敗した場合は低解像度
-        const fallbackImg = new Image();
-        fallbackImg.onload = () => {
-            img.src = lowResUrl;
-            img.style.opacity = '0';
-            img.style.transition = 'opacity 0.3s ease';
-            requestAnimationFrame(() => {
-                img.style.opacity = '1';
-            });
-            loadedImages.add(videoId);
-            imageCache.set(videoId, lowResUrl);
-        };
-        fallbackImg.src = lowResUrl;
+    img.onerror = () => {
+        console.log(`Image failed for ${videoId}, using placeholder`);
+        // エラー時はプレースホルダー表示
+        img.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%)';
+        img.style.opacity = '1';
+        loadedImages.add(videoId);
+        img.onerror = null; // メモリ解放
     };
     
-    tempImg.src = highResUrl;
+    img.src = imageUrl;
 }
 
 // ========== DOM操作最適化 ========== //
