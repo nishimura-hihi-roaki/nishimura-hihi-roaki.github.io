@@ -84,6 +84,16 @@ body {
     color: var(--primary-color);
 }
 
+.header .logo a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.header .logo a:hover {
+    color: var(--text-primary);
+}
+
 .header .nav-links {
     display: flex;
     list-style: none;
@@ -100,6 +110,7 @@ body {
 .header .nav-links a:hover {
     color: var(--primary-color);
 }
+
 
 /* ========== 共通フッター ========== */
 .footer {
