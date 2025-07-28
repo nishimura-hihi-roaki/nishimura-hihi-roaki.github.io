@@ -42,24 +42,6 @@
             observer.observe(el);
         });
 
-        // コンタクトフォーム送信処理：フォーム送信時の処理
-        document.querySelector('.contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // フォームデータを取得
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
-            
-            // 送信成功メッセージ（実際のメール送信機能は別途実装が必要）
-            alert('メッセージを送信しました。ありがとうございます！');
-            
-            // フォームをリセット
-            this.reset();
-        });
-
         // ページロード時のアニメーション：ページが読み込まれた時の初期化
         window.addEventListener('load', function() {
             document.body.style.opacity = '1';
