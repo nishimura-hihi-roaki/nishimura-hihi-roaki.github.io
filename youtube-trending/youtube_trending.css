@@ -1,242 +1,303 @@
-@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+/* ===================================
+   Google Fonts
+=================================== */
+@import url('https://fonts.googleapis.com/css?family=Lato:100,300,400,700');
 
-html {
-  height: 100%;
-  font-family: 'Lato', sans-serif;
+/* ===================================
+   基本スタイル
+=================================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
 }
+
 body {
-  height: 100%;
-  margin: 0;
-  background: linear-gradient(135deg, rgba(65,131,155,1) 0%,rgba(51,98,123,1) 100%);
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+    background: linear-gradient(135deg, rgba(65,131,155,1) 0%, rgba(51,98,123,1) 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
+
+/* ===================================
+   コンテナ & レイアウト (Flexbox)
+=================================== */
 #container {
-  display: table;
-  width: 1200px;
-  background: #202b33;
-  margin: 60px auto;
-  border-radius: 4px;
+    display: flex;
+    width: 90%;
+    max-width: 1400px;
+    min-width: 1000px;
+    margin: 60px auto;
+    background: #202b33;
+    border-radius: 4px;
 }
 
-/* Side Bar */
+/* ---------- サイドバー ---------- */
 #sideMenu {
-  width: 240px;
-  height: 100%;
-  padding: 30px;
-  border-right: 1px solid #111;
-  display: table-cell;
-  vertical-align: top;
-  color: #fff;
+    width: 240px;
+    padding: 30px;
+    border-right: 1px solid #111;
+    color: #fff;
 }
+
 .menu {
-  list-style: none;
-  margin:  24px 0;
-  padding: 0;
+    list-style: none;
+    margin: 24px 0;
+    padding: 0;
 }
+
 .menu li {
-  display: block;
-  height: 30px;
-  width: 100%;
-  line-height: 30px;
-  font-size: 14px;
-  font-weight: 200;
-  color: rgba(255, 255, 255, .6);
-  position: relative;
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, .6);
+    position: relative;
 }
-.menu li:hover {
-  color: #239ae3;
-}
+
 .menu li:first-child {
-  height: 35px;
-  line-height: 35px;
-  font-size: 16px;
-  font-weight: 400;
-  color: #fff;
+    height: 35px;
+    line-height: 35px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
 }
+
+.menu li:hover {
+    color: #239ae3;
+}
+
 .addCategory {
-  font-size: 13px;
-  font-weight: 200;
-  color: rgba(255, 255, 255, .2);
+    font-size: 13px;
+    font-weight: 200;
+    color: rgba(255, 255, 255, .2);
 }
+
 .addCategory:hover {
-  color: #fff;
+    color: #fff;
 }
 
-/* Content */
+/* ---------- コンテンツ ---------- */
 #content {
-  width: calc(100% - 240px);
-  height: 100%;
-  padding: 25px;
-  display: table-cell;
+    flex: 1;
+    padding: 25px;
 }
+
+/* ---------- タイトルバー ---------- */
 #titleBar {
-  height: 36px;
-  margin-bottom: 30px;
+    height: 36px;
+    margin-bottom: 30px;
 }
+
 #profilePic {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #999;
-  float: right;
-  margin-top: -8px;
-  margin-left: 14px;
-  overflow: hidden;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #999;
+    float: right;
+    margin-top: -8px;
+    margin-left: 14px;
+    overflow: hidden;
 }
+
 #profilePic img {
-  width: 100%;
+    width: 100%;
 }
+
 .controls {
-  display: block;
-  width: 70px;
-  height: 20px;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 10px;
-  font-weight: 300;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 20px;
-  float: right;
-  border-radius: 20px;
+    display: inline-block;
+    width: 70px;
+    height: 20px;
+    font-size: 10px;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    float: right;
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.4);
 }
+
 .activeControl {
-  background: rgba(255, 255, 255, 0.9);
-  color: #202b33;
-  font-weight: 600;
+    background: rgba(255, 255, 255, 0.9);
+    color: #202b33;
+    font-weight: 600;
 }
+
+/* ===================================
+   セールス / チャート
+=================================== */
 #salesData {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    height: 300px;
+    max-height: 300px;
 }
+
+.mainChart {
+    position: relative;
+    min-height: 400px;
+}
+
+/* ---------- Total Sales ---------- */
 #totalSales {
-  height: 120px;
-  position: relative;
-  margin-top: 24px;
-  margin-bottom: 50px;
+    display: flex;
+    justify-content: space-between;
+    height: 120px;
+    margin: 24px 0 50px 0;
 }
+
 #totalSales .col {
-  float: left;
-  width: 33.33%;
-  height: 100%;
+    flex: 1;
+    position: relative;
 }
+
 #totalSales .col .progressTitle {
-  float: left;
-  margin-left: 20px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.4);
+    margin-left: 20px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
 }
+
 .progressBar {
-  float: left;
-  height: 120px;
-  width: 120px;
-  font-size: 40px;
-  text-align: center;
-  line-height: 120px;
+    width: 120px;
+    height: 120px;
+    font-size: 40px;
+    text-align: center;
+    line-height: 120px;
 }
 
-/* Icons */
+/* ===================================
+   アイコン
+=================================== */
+.notification, .colorIcon, .plus {
+    display: inline-block;
+    border-radius: 50%;
+    position: relative;
+}
+
 .notification {
-  display: block;
-  width: 20px;
-  height: 20px;
-  color: #202b33;
-  font-weight: 600;
-  line-height: 20px;
-  text-align: center;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .6);
-  position: absolute;
-  top: 0; bottom: 0; right: 2%;
-  margin: auto;
+    width: 20px;
+    height: 20px;
+    color: #202b33;
+    font-weight: 600;
+    line-height: 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, .6);
 }
+
 .colorIcon {
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  position: absolute;
-  top: 0; bottom: 0; right: 2%;
-  margin: auto;
+    width: 10px;
+    height: 10px;
 }
+
 .plus {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  color: #202b33;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 8px;
-  padding: 4px;
-  margin-right: 6px;
-  border: 2px solid rgba(255, 255, 255, .2);
-  border-radius: 50%;
-  color: rgba(255, 255, 255, .2);
-}
-.red {
-  background: #ec1561;
-}
-.orange {
-  background: #ff9939;
-}
-.green {
-  background: #2bab51;
+    width: 20px;
+    height: 20px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 8px;
+    padding: 4px;
+    margin-right: 6px;
+    border: 2px solid rgba(255, 255, 255, .2);
+    color: rgba(255, 255, 255, .2);
 }
 
-/* Table */
+.red { background: #ec1561; }
+.orange { background: #ff9939; }
+.green { background: #2bab51; }
+
+/* ===================================
+   テーブル
+=================================== */
 table {
-  width: 100%;
-  border-collapse: collapse;
-}
-th {
-  text-align: left;
-  color: #fff;
-  font-weight: 400;
-  font-size: 13px;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 0 10px;
-  padding-bottom: 14px;
-}
-tr:not(:first-child):hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-td {
-  height: 40px;
-  line-height: 40px;
-  font-weight: 300;
-  color: rgba(255, 255, 255, 0.4);
-  padding: 0 10px;
-}
-/* Headers */
-h1 {
-  font-size: 13px;
-  font-weight: 200;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin: 0;
-}
-h2 {
-  float: left;
-  font-size: 19px;
-  font-weight: 200;
-  letter-spacing: 1px;
-  margin: 0;
-  color: rgba(255, 255, 255, .8);
-}
-h3 {
-  float: left;
-  color: #fff;
-  font-size: 32px;
-  font-weight: 300;
-  margin: 0;
-  margin-top: 8%;
-  margin-left: 20px;
-  margin-bottom: 6px;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    margin-top: 20px;
 }
 
-.clearFix {
-  clear: both;
+th, td {
+    padding: 12px 10px;
+    text-align: left;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-weight: 400;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+tr:hover { background: rgba(255, 255, 255, 0.1) !important; }
+
+td {
+    height: 40px;
+    line-height: 40px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+td a {
+    color: #4fc3f7;
+    text-decoration: none;
+}
+
+td a:hover {
+    color: #29b6f6 !important;
+    text-decoration: underline !important;
+}
+
+/* 列幅設定 */
+th:nth-child(1), td:nth-child(1) { width: 120px; }   /* 日付 */
+th:nth-child(2), td:nth-child(2) { width: 60px; }    /* 順位 */
+th:nth-child(3), td:nth-child(3) { width: 35%; }     /* タイトル */
+th:nth-child(4), td:nth-child(4) { width: 20%; }     /* チャンネル */
+th:nth-child(5), td:nth-child(5) { width: 200px; }   /* ジャンル */
+th:nth-child(6), td:nth-child(6) { width: 15%; }     /* 再生数 */
+th:nth-child(7), td:nth-child(7) { width: 15%; }     /* 高評価 */
+
+/* 長いテキスト省略 */
+td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* ===================================
+   ヘッダー
+=================================== */
+h1 { font-size: 13px; font-weight: 200; letter-spacing: 1px; text-transform: uppercase; margin: 0; }
+h2 { float: left; font-size: 19px; font-weight: 200; letter-spacing: 1px; margin: 0; color: rgba(255, 255, 255, .8); }
+h3 { float: left; color: #fff; font-size: 32px; font-weight: 300; margin: 8% 0 6px 20px; }
+
+.clearFix { clear: both; }
+
+/* ===================================
+   レスポンシブ
+=================================== */
+
+@media (max-width: 1200px) {
+    th:nth-child(1), td:nth-child(1) { width: 100px; }   /* 日付 */
+    th:nth-child(3), td:nth-child(3) { width: 30%; }     /* タイトル */
+    th:nth-child(4), td:nth-child(4) { width: 20%; }     /* チャンネル */
+    th:nth-child(5), td:nth-child(5) { width: 150px; }   /* ジャンル */
+}
+
+@media (max-width: 900px) {
+    th:nth-child(1), td:nth-child(1) { width: 90px; }    /* 日付 */
+    th:nth-child(2), td:nth-child(2) { width: 50px; }    /* 順位 */
+    th:nth-child(3), td:nth-child(3) { width: 40%; }     /* タイトル */
+    th:nth-child(4), td:nth-child(4) { width: 20%; }     /* チャンネル */
+    th:nth-child(5), td:nth-child(5) { width: 120px; }   /* ジャンル */
+    th:nth-child(6), td:nth-child(6) { width: 17.5%; }  /* 再生数 */
+    th:nth-child(7), td:nth-child(7) { width: 17.5%; }  /* 高評価 */
 }
