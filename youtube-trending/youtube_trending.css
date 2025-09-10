@@ -71,15 +71,7 @@ body {
     color: #239ae3;
 }
 
-.addCategory {
-    font-size: 13px;
-    font-weight: 200;
-    color: rgba(255, 255, 255, .2);
-}
 
-.addCategory:hover {
-    color: #fff;
-}
 
 /* ---------- コンテンツ ---------- */
 #content {

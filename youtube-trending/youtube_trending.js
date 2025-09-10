@@ -1,4 +1,4 @@
-// Sales Dashboard JavaScript - 日付別表示機能追加版
+// YouTube Trending Dashboard JavaScript - 改良版
 
 // グローバル変数
 let allYouTubeData = [];
@@ -130,8 +130,8 @@ async function fetchYouTubeData() {
         // 利用可能な日付を取得してソート（新しい順）
         availableDates = [...new Set(allYouTubeData.map(row => getDateOnly(row[0])))].sort((a, b) => new Date(b) - new Date(a));
 
-        // 日付セレクターを作成・更新
-        createDateSelector();
+        // 日付セレクターを更新
+        updateDateSelector();
         
         // デフォルト表示（全期間最高再生数）
         showAllTimeData();
@@ -142,73 +142,96 @@ async function fetchYouTubeData() {
     }
 }
 
-// 日付セレクターを作成
-function createDateSelector() {
-    // 既存の日付セレクターがあれば削除
-    const existingSelector = document.getElementById('dateSelector');
-    if (existingSelector) {
-        existingSelector.remove();
+// カテゴリ別YouTubeデータ取得（GAS Webアプリ呼び出し - JSONP版）
+async function fetchYouTubeDataByCategory(category = "All") {
+    try {
+        console.log(`カテゴリ "${category}" のデータ取得中...`);
+
+        // JSONPを使用してGASからデータを取得
+        const data = await new Promise((resolve, reject) => {
+            const callbackName = 'jsonpCallback_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            const script = document.createElement('script');
+            const gasUrl = 'https://script.google.com/macros/s/AKfycbwYLE7XorPdhO1TJGZFzzaPmgorckF1pf4elNaG-gcUdr2EZd1SO5USH4rTbn5qguDA/exec';
+            
+            let isCompleted = false; // 重複実行防止フラグ
+            
+            // クリーンアップ関数
+            const cleanup = () => {
+                if (script.parentNode) {
+                    script.parentNode.removeChild(script);
+                }
+                if (window[callbackName]) {
+                    delete window[callbackName];
+                }
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                }
+            };
+            
+            // グローバルコールバック関数を定義
+            window[callbackName] = function(responseData) {
+                if (isCompleted) return;
+                isCompleted = true;
+                
+                cleanup();
+                resolve(responseData);
+            };
+            
+            // エラーハンドリング
+            script.onerror = function() {
+                if (isCompleted) return;
+                isCompleted = true;
+                
+                cleanup();
+                reject(new Error(`GASへの接続に失敗しました`));
+            };
+            
+            // タイムアウト処理（10秒）
+            const timeoutId = setTimeout(() => {
+                if (isCompleted) return;
+                isCompleted = true;
+                
+                cleanup();
+                reject(new Error(`データ取得がタイムアウトしました`));
+            }, 10000);
+            
+            // スクリプトタグを作成してリクエスト実行
+            script.src = `${gasUrl}?category=${encodeURIComponent(category)}&callback=${callbackName}`;
+            document.head.appendChild(script);
+        });
+
+        console.log(`カテゴリ "${category}" のデータ取得完了:`, data);
+        return data;
+
+    } catch (error) {
+        console.error(`カテゴリ "${category}" のデータ取得に失敗:`, error);
+        throw error;
     }
+}
+
+// 日付セレクターを更新
+function updateDateSelector() {
+    const dateSelect = document.getElementById('dateSelect');
     
-    // 日付セレクターのHTML要素を作成
-    const selectorHTML = `
-        <div id="dateSelector" style="background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: none;">
-            <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                <label for="dateSelect" style="font-weight: 500; color: #333;">日付を選択:</label>
-                <select id="dateSelect" style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px;">
-                    <option value="">日付を選択してください...</option>
-                </select>
-                <button id="loadDateBtn" style="background: #4fc3f7; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">表示</button>
-                <button id="refreshDataBtn" style="background: #28a745; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">データ更新</button>
-            </div>
-            <div id="currentViewInfo" style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 5px; font-size: 14px; color: #666;"></div>
-        </div>
-    `;
-    
-    // h2要素の前に挿入
-    const h2Element = document.querySelector('.mainChart h2');
-    h2Element.insertAdjacentHTML('beforebegin', selectorHTML);
+    // 既存のオプションをクリア（最初のデフォルトオプション以外）
+    dateSelect.innerHTML = '<option value="">日付を選択してください...</option>';
     
     // 日付オプションを追加
-    const dateSelect = document.getElementById('dateSelect');
     availableDates.forEach(date => {
         const option = document.createElement('option');
         option.value = date;
         option.textContent = formatDateForDisplay(date);
         dateSelect.appendChild(option);
     });
-    
-    // 表示切り替えボタンを作成
-    createViewToggleButtons();
-    
-    // イベントリスナーを設定
-    setupDateSelectorEvents();
 }
 
-// 表示切り替えボタンを作成
-function createViewToggleButtons() {
-    // 既存のコントロールを更新
-    const titleBar = document.getElementById('titleBar');
-    const controlsContainer = titleBar.querySelector('.controls')?.parentElement;
-    
-    if (controlsContainer) {
-        controlsContainer.innerHTML = `
-            <span class="controls activeControl" id="allTimeBtn">全期間最高再生数</span>
-            <span class="controls" id="dailyRankBtn">日別ランキング</span>
-        `;
-        
-        // イベントリスナーを設定
-        document.getElementById('allTimeBtn').addEventListener('click', () => switchToAllTimeView());
-        document.getElementById('dailyRankBtn').addEventListener('click', () => switchToDailyView());
-    }
-}
-function createViewToggleButtons() {
+// イベントリスナーの設定
+function setupEventListeners() {
+    // 表示切り替えボタン
     document.getElementById('allTimeBtn').addEventListener('click', switchToAllTimeView);
     document.getElementById('dailyRankBtn').addEventListener('click', switchToDailyView);
-}
-// 日付セレクターのイベントリスナー設定
-function setupDateSelectorEvents() {
-    // 日付選択時
+    
+    // 日付選択
     document.getElementById('dateSelect').addEventListener('change', (e) => {
         if (e.target.value && currentView === 'daily') {
             showDailyData(e.target.value);
@@ -256,7 +279,7 @@ function switchToDailyView() {
     }
 }
 
-// 全期間最高再生数データを表示（元の機能）
+// 全期間最高再生数データを表示
 function showAllTimeData() {
     const seenUrls = new Set();
     const youtubeData = allYouTubeData
@@ -269,11 +292,13 @@ function showAllTimeData() {
     updateTableTitle('今月の急上昇最大再生数ランキング');
 }
 
+// 日付部分のみを取得
 function getDateOnly(dateString) {
     const match = dateString.match(/^(\d{4}\/\d{2}\/\d{2})/);
     return match ? match[1] : dateString;
 }
 
+// 日別データを表示
 function showDailyData(selectedDate) {
     if (!selectedDate) return;
 
@@ -293,16 +318,15 @@ function showDailyData(selectedDate) {
     updateTableTitle(`${selectedDate} - 急上昇ランキング`);
 }
 
-
-// テーブルを動的に更新（元の関数を改良）
+// テーブルを動的に更新
 function updateTable(data) {
-    const table = document.querySelector('table');
+    const table = document.getElementById('dataTable');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
     
-    // 既存のテーブル内容をクリア
-    table.innerHTML = '';
-    
-    // ヘッダー行を作成
-    const headerRow = table.insertRow();
+    // ヘッダーを設定
+    thead.innerHTML = '';
+    const headerRow = thead.insertRow();
     const headers = ['日付', '順位(当時)', 'タイトル', 'チャンネル', 'ジャンル','再生数', '高評価'];
     headers.forEach(headerText => {
         const th = document.createElement('th');
@@ -310,17 +334,16 @@ function updateTable(data) {
         headerRow.appendChild(th);
     });
     
-    // データ行を作成
+    // データ行をクリアして新しいデータを追加
+    tbody.innerHTML = '';
     data.forEach(row => {
-        const tr = table.insertRow();
+        const tr = tbody.insertRow();
         
         // 日付
-        const dateCell = tr.insertCell();
-        dateCell.textContent = row[0];
+        tr.insertCell().textContent = row[0];
         
         // 順位
-        const rankCell = tr.insertCell();
-        rankCell.textContent = row[1];
+        tr.insertCell().textContent = row[1];
         
         // タイトル（リンク付き）
         const titleCell = tr.insertCell();
@@ -328,25 +351,20 @@ function updateTable(data) {
         link.href = row[10]; // URL
         link.textContent = row[2]; // タイトル
         link.target = '_blank';
-        link.style.color = '#4fc3f7';
-        link.style.textDecoration = 'none';
+        link.className = 'table-link';
         titleCell.appendChild(link);
         
         // チャンネル
-        const channelCell = tr.insertCell();
-        channelCell.textContent = row[3];
+        tr.insertCell().textContent = row[3];
         
         // ジャンル
-        const genreCell = tr.insertCell();
-        genreCell.textContent = row[5]; 
+        tr.insertCell().textContent = row[5];
         
         // 再生数（フォーマット）
-        const viewsCell = tr.insertCell();
-        viewsCell.textContent = formatNumber(row[7]);
+        tr.insertCell().textContent = formatNumber(row[7]);
         
         // 高評価（フォーマット）
-        const likesCell = tr.insertCell();
-        likesCell.textContent = formatNumber(row[8]);
+        tr.insertCell().textContent = formatNumber(row[8]);
     });
 }
 
@@ -360,7 +378,7 @@ function updateCurrentViewInfo(info) {
 
 // テーブルタイトルを更新
 function updateTableTitle(title) {
-    const titleElement = document.querySelector('.mainChart h2');
+    const titleElement = document.getElementById('tableTitle');
     if (titleElement) {
         titleElement.textContent = title;
     }
@@ -371,45 +389,39 @@ function formatDateForDisplay(dateString) {
     return dateString; // AM/PM付きのまま表示
 }
 
-
 // テーブルローディング表示
 function showTableLoading() {
-    const table = document.querySelector('table');
-    table.innerHTML = `
+    const table = document.getElementById('dataTable');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+    
+    thead.innerHTML = `
         <tr>
-            <th colspan="7" style="text-align: center; padding: 40px;">
+            <th colspan="7" class="loading-message">
                 データを読み込み中...
                 <div style="margin-top: 10px;">
-                    <div style="display: inline-block; width: 20px; height: 20px; border: 2px solid #ddd; border-top: 2px solid #4fc3f7; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+                    <div class="spinner"></div>
                 </div>
             </th>
         </tr>
     `;
-    
-    // CSS アニメーションを追加
-    if (!document.getElementById('spinAnimation')) {
-        const style = document.createElement('style');
-        style.id = 'spinAnimation';
-        style.textContent = `
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
+    tbody.innerHTML = '';
 }
 
 // テーブルエラー表示
 function showTableError(message) {
-    const table = document.querySelector('table');
-    table.innerHTML = `
+    const table = document.getElementById('dataTable');
+    const thead = table.querySelector('thead');
+    const tbody = table.querySelector('tbody');
+    
+    thead.innerHTML = `
         <tr>
-            <td colspan="7" style="text-align: center; color: #e74c3c; padding: 40px;">
+            <td colspan="7" class="error-message">
                 ${message}
             </td>
         </tr>
     `;
+    tbody.innerHTML = '';
 }
 
 // 数値をフォーマット（1,234,567 形式）
@@ -421,6 +433,9 @@ function formatNumber(num) {
 // ページ読み込み後に実行
 document.addEventListener('DOMContentLoaded', function() {
     const dashboard = initDashboard();
+    
+    // イベントリスナーを設定
+    setupEventListeners();
     
     // YouTubeデータを取得してテーブルを更新
     fetchYouTubeData();
