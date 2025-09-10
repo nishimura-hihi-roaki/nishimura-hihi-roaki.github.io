@@ -119,32 +119,6 @@
             outline: none;
             background-color: rgba(255, 255, 255, 0.2);
         }
-
-        /* コントロールボタンのスタイリング調整 */
-        .controlsContainer {
-            display: flex;
-            gap: 10px;
-            float: right;
-        }
-
-        .controls {
-            display: inline-block;
-            min-width: 80px;
-            height: 20px;
-            font-size: 10px;
-            font-weight: 300;
-            text-transform: uppercase;
-            text-align: center;
-            line-height: 20px;
-            border-radius: 20px;
-            color: rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .controls:hover {
-            color: rgba(255, 255, 255, 0.7);
-        }
     </style>
 </head>
 <body>
@@ -205,9 +179,6 @@
                 <h2 id="tableTitle">今月の急上昇最大再生数ランキング</h2>
                 <div class="clearFix"></div>
 
-                <!-- 統計情報表示用（将来の拡張用） -->
-                <div id="tableStatistics" style="display: none;"></div>
-
                 <table id="dataTable">
                     <thead>
                         <tr>
@@ -226,12 +197,6 @@
         </div>
     </div>
 
-    <!-- JavaScript ファイルを分割して読み込み -->
-    <script src="utils.js"></script>
-    <script src="data_manager.js"></script>
-    <script src="chart_manager.js"></script>
-    <script src="table_manager.js"></script>
-    <script src="view_manager.js"></script>    
-    <script src="main.js"></script>
+    <script src="youtube_trending.js"></script>
 </body>
 </html>
