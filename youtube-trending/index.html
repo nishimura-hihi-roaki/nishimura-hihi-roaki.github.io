@@ -25,6 +25,20 @@
             animation: spin 1s linear infinite;
         }
 
+        /* チャート関連のスタイル改善 */
+        #salesData, #categoryChart {
+            height: 300px !important;
+            max-height: 400px !important;
+            width: 100% !important;
+        }
+
+        .mainChart {
+            position: relative;
+            min-height: 400px;
+            max-height: 500px;
+            overflow: hidden;
+        }
+
         /* 日付セレクター用CSS */
         #dateSelector {
             background: white;
@@ -186,8 +200,11 @@
             </div>
 
             <div class="mainChart">
-                <canvas id="salesData"></canvas>
-                <canvas id="categoryChart" style="display: none;"></canvas>
+                <!-- チャート専用エリア -->
+                <div class="chart-container">
+                    <canvas id="salesData"></canvas>
+                    <canvas id="categoryChart" style="display: none; height: 400px; max-height: 400px;"></canvas>
+                </div>
 
                 <!-- 日付セレクター -->
                 <div id="dateSelector">
@@ -201,7 +218,10 @@
                     </div>
                     <div id="currentViewInfo"></div>
                 </div>
+            </div>
 
+            <!-- テーブル専用エリア -->
+            <div class="table-container">
                 <h2 id="tableTitle">今月の急上昇最大再生数ランキング</h2>
                 <div class="clearFix"></div>
 

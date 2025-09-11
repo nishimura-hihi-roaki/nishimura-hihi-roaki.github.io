@@ -85,11 +85,11 @@ class TableManager {
             // ジャンル
             this.createCell(tr, row[5]);
             
-            // 再生数（フォーマット済み）
-            this.createCell(tr, Utils.formatNumber(row[7]));
+            // 再生数（短縮フォーマット）
+            this.createCell(tr, Utils.formatNumberShort(row[7]));
             
-            // 高評価（フォーマット済み）
-            this.createCell(tr, Utils.formatNumber(row[8]));
+            // 高評価（短縮フォーマット）
+            this.createCell(tr, Utils.formatNumberShort(row[8]));
         });
     }
 
@@ -227,8 +227,8 @@ class TableManager {
         const statsHtml = `
             <div class="table-statistics">
                 <p>データ件数: ${data.length}件</p>
-                <p>再生数 - 平均: ${Utils.formatNumber(viewsStats.avg)} | 最大: ${Utils.formatNumber(viewsStats.max)}</p>
-                <p>高評価数 - 平均: ${Utils.formatNumber(likesStats.avg)} | 最大: ${Utils.formatNumber(likesStats.max)}</p>
+                <p>再生数 - 平均: ${Utils.formatNumberShort(viewsStats.avg)} | 最大: ${Utils.formatNumberShort(viewsStats.max)}</p>
+                <p>高評価数 - 平均: ${Utils.formatNumberShort(likesStats.avg)} | 最大: ${Utils.formatNumberShort(likesStats.max)}</p>
             </div>
         `;
 

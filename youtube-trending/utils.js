@@ -7,6 +7,31 @@ class Utils {
         return parseInt(num).toLocaleString();
     }
 
+    // 数値を短縮表示（K, M, B形式）
+    static formatNumberShort(num) {
+        if (!num || isNaN(num)) return '0';
+        
+        const number = parseFloat(num);
+        if (number === 0) return '0';
+        
+        const units = [
+            { value: 1e9, suffix: 'B' },
+            { value: 1e6, suffix: 'M' },
+            { value: 1e3, suffix: 'K' }
+        ];
+        
+        for (let unit of units) {
+            if (number >= unit.value) {
+                const formatted = (number / unit.value).toFixed(1);
+                return formatted.endsWith('.0') ? 
+                    Math.floor(number / unit.value) + unit.suffix : 
+                    formatted + unit.suffix;
+            }
+        }
+        
+        return Math.floor(number).toString();
+    }
+
     // 日付部分のみを取得
     static getDateOnly(dateString) {
         const match = dateString.match(/^(\d{4}\/\d{2}\/\d{2})/);
@@ -22,11 +47,16 @@ class Utils {
     static getCategoryColor(category) {
         const colors = {
             'All': 'rgba(79, 195, 247, 1)',
-            '音楽': 'rgba(236, 21, 97, 1)',
+            '映画とアニメ': 'rgba(236, 21, 97, 1)',
             'エンターテイメント': 'rgba(255, 153, 57, 1)',
             'ゲーム': 'rgba(43, 171, 81, 1)',
             'ハウツーとスタイル': 'rgba(156, 39, 176, 1)',
-            'ペットと動物': 'rgba(255, 193, 7, 1)'
+            'ペットと動物': 'rgba(255, 193, 7, 1)',
+            '音楽': 'rgba(103, 58, 183, 1)',
+            'スポーツ': 'rgba(255, 87, 34, 1)',
+            'ニュースと政治': 'rgba(96, 125, 139, 1)',
+            '教育': 'rgba(76, 175, 80, 1)',
+            '科学と技術': 'rgba(33, 150, 243, 1)'
         };
         return colors[category] || 'rgba(158, 158, 158, 1)';
     }

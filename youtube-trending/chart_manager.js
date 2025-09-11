@@ -146,6 +146,12 @@ class ChartManager {
             this.categoryChart.destroy();
         }
 
+        // キャンバスのサイズを明示的に設定
+        const canvas = ctx.getContext('2d').canvas;
+        canvas.style.width = '100%';
+        canvas.style.height = '400px'; // 高さを固定
+        canvas.style.maxHeight = '400px'; // 最大高さも制限
+
         const chartData = this.prepareCategoryChartData(statistics);
         const chartOptions = this.getCategoryChartOptions();
 
@@ -205,7 +211,7 @@ class ChartManager {
                     callbacks: {
                         label: function(context) {
                             const label = context.dataset.label || '';
-                            const value = Utils.formatNumber(context.parsed.y);
+                            const value = Utils.formatNumberShort(context.parsed.y);
                             return `${label}: ${value}`;
                         }
                     }
@@ -216,7 +222,8 @@ class ChartManager {
                     grid: { display: false },
                     ticks: {
                         color: '#fff',
-                        maxRotation: 45
+                        maxRotation: 45,
+                        font: { size: 10 }
                     }
                 },
                 y: {
@@ -229,14 +236,16 @@ class ChartManager {
                     },
                     ticks: {
                         color: '#fff',
+                        font: { size: 10 },
                         callback: function(value) {
-                            return Utils.formatNumber(value);
+                            return Utils.formatNumberShort(value);
                         }
                     },
                     title: {
                         display: true,
                         text: '再生数',
-                        color: '#fff'
+                        color: '#fff',
+                        font: { size: 12 }
                     }
                 },
                 y1: {
@@ -249,14 +258,16 @@ class ChartManager {
                     },
                     ticks: {
                         color: '#fff',
+                        font: { size: 10 },
                         callback: function(value) {
-                            return Utils.formatNumber(value);
+                            return Utils.formatNumberShort(value);
                         }
                     },
                     title: {
                         display: true,
                         text: '高評価数',
-                        color: '#fff'
+                        color: '#fff',
+                        font: { size: 12 }
                     }
                 }
             },

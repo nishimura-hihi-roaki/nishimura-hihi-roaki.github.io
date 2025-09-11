@@ -71,8 +71,6 @@ body {
     color: #239ae3;
 }
 
-
-
 /* ---------- コンテンツ ---------- */
 #content {
     flex: 1;
@@ -125,13 +123,44 @@ body {
 =================================== */
 #salesData {
     margin-bottom: 60px;
-    height: 300px;
-    max-height: 300px;
+    height: 300px !important;
+    max-height: 300px !important;
+    width: 100% !important;
+}
+
+#categoryChart {
+    margin-bottom: 60px;
+    height: 400px !important;
+    max-height: 400px !important;
+    width: 100% !important;
 }
 
 .mainChart {
     position: relative;
     min-height: 400px;
+    /* max-height制限を削除してテーブル表示を許可 */
+    margin-bottom: 30px;
+    overflow: visible; /* hiddenをvisibleに変更 */
+}
+
+/* チャートコンテナの追加スタイル */
+.mainChart canvas {
+    display: block;
+    box-sizing: border-box;
+}
+
+/* チャートエリアとテーブルエリアを分離 */
+.chart-container {
+    position: relative;
+    height: 400px;
+    max-height: 400px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.table-container {
+    position: relative;
+    overflow: visible;
 }
 
 /* ---------- Total Sales ---------- */
@@ -264,6 +293,7 @@ td:nth-child(3), td:nth-child(4), td:nth-child(5) {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 /* ===================================
    ヘッダー
 =================================== */
@@ -276,7 +306,6 @@ h3 { float: left; color: #fff; font-size: 32px; font-weight: 300; margin: 8% 0 6
 /* ===================================
    レスポンシブ
 =================================== */
-
 @media (max-width: 1200px) {
     th:nth-child(1), td:nth-child(1) { width: 100px; }   /* 日付 */
     th:nth-child(3), td:nth-child(3) { width: 30%; }     /* タイトル */
