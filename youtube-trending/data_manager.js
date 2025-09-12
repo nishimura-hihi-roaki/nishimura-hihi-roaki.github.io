@@ -213,8 +213,8 @@ class DataManager {
         
         // 全データをチェックしてカテゴリを抽出
         for (let i = 1; i < data.length; i++) {
-            if (data[i] && data[i][5] && data[i][5].trim()) {
-                const category = data[i][5].trim();
+            if (data[i] && data[i][4] && data[i][4].trim()) {
+                const category = data[i][4].trim();
                 cats.add(category);
             }
         }
@@ -235,8 +235,8 @@ class DataManager {
         console.log(`カテゴリ "${category}" でフィルタリング中...`);
         
         for (let i = 1; i < data.length; i++) {
-            if (data[i] && data[i][5]) {
-                const rowCategory = data[i][5].trim();
+            if (data[i] && data[i][4]) {
+                const rowCategory = data[i][4].trim();
                 if (rowCategory === category) {
                     filtered.push(data[i]);
                 }

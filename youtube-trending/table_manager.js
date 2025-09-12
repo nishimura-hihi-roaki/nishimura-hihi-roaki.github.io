@@ -83,7 +83,7 @@ class TableManager {
             this.createCell(tr, row[3]);
             
             // ジャンル
-            this.createCell(tr, row[5]);
+            this.createCell(tr, row[4]);
             
             // 再生数（短縮フォーマット）
             this.createCell(tr, Utils.formatNumberShort(row[7]));
@@ -221,8 +221,8 @@ class TableManager {
     showStatistics(data) {
         if (!data || data.length === 0) return;
 
-        const viewsStats = Utils.getDataStatistics(data, 7);
-        const likesStats = Utils.getDataStatistics(data, 8);
+        const viewsStats = Utils.getDataStatistics(data, 6); // 再生数は6列目
+        const likesStats = Utils.getDataStatistics(data, 7); // 高評価は7列目
 
         const statsHtml = `
             <div class="table-statistics">
